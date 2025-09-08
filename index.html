@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="description"
+        content="Stack It Up!: 3D Stable Structure Generation from 2D Hand-drawn Sketch">
+  <meta name="keywords" content="Robotic Goal Specification, Compositional Generative Models">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>"Stack It Up!": 3D Stable Structure Generation from 2D Hand-drawn Sketch</title>
+
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-PYVRSFMDRL"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+
+    function gtag() {
+      dataLayer.push(arguments);
+    }
+
+    gtag('js', new Date());
+
+    gtag('config', 'G-PYVRSFMDRL');
+  </script>
+
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
+        rel="stylesheet">
+
+  <link rel="stylesheet" href="./static/css/bulma.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-carousel.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-slider.min.css">
+  <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
+  <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="./static/css/index.css">
+  <link rel="icon" href="./static/images/favicon.jpg">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script defer src="./static/js/fontawesome.all.min.js"></script>
+  <script src="./static/js/bulma-carousel.min.js"></script>
+  <script src="./static/js/bulma-slider.min.js"></script>
+  <script src="./static/js/index.js"></script>
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+
+<nav class="navbar" role="navigation" aria-label="main navigation">
+  <div class="navbar-brand">
+    <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+    </a>
+  </div>
+  <div class="navbar-menu">
+    <div class="navbar-start" style="flex-grow: 1; justify-content: center;">
+      <a class="navbar-item" href="https://arxiv.org/abs/2405.11928">
+      <span class="icon">
+          <i class="fas fa-home"></i>
+      </span>
+      </a>
+
+    </div>
+
+  </div>
+</nav>
+
+
+<section class="hero">
+  <div class="hero-body">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered">
+        <div class="column has-text-centered">
+          <h1 class="title is-1 publication-title">"Stack It Up!": 3D Stable Structure Generation from 2D Hand-drawn Sketch</h1>
+          <div class="is-size-5 publication-authors">
+            <span class="author-block">
+              Yiqing Xu<sup>1</sup>,
+            </span>
+            <span class="author-block">
+              Linfeng Li<sup>1</sup>,
+            </span>
+            <span class="author-block">
+              Cunjun Yu<sup>1</sup>,
+            </span>
+            <span class="author-block">
+              David Hsu<sup>1,2</sup>,
+            </span>
+          </div>
+
+          <div class="is-size-5 publication-authors">
+            <span class="author-block"><sup>1</sup>School of Computing, National University of Singapore</span>
+            <span class="author-block"><sup>2</sup>Smart System Institute</span>
+          </div>
+
+          <div class="column has-text-centered">
+            <div class="publication-links">
+              <!-- PDF Link. -->
+              <span class="link-block">
+                <a href="https://arxiv.org/abs/2508.02093"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fas fa-file-pdf"></i>
+                  </span>
+                  <span>Paper</span>
+                </a>
+              </span>
+              <span class="link-block">
+                <a href="https://arxiv.org/pdf/2508.02093"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="ai ai-arxiv"></i>
+                  </span>
+                  <span>ArXiv</span>
+                </a>
+              </span>
+              <span class="link-block">
+                <a href=""
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fab fa-github"></i>
+                  </span>
+                  <span>Code</span>
+                  </a>
+              </span>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- <section class="hero teaser">
+  <div class="container is-max-desktop">
+    <div class="hero-body">
+      <div class="columns is-centered">
+        <div class="column is-full">
+          <img id="teaserGif" src="./static/images/setitup.gif" alt="Teaser GIF" style="width: 100%; height: auto;">
+          <figcaption class="subtitle has-text-centered">Given the underspecified instruction, 'Set up a table for my breakfast, please!', SetItUp interprets this concept and proposes the object layout for the breakfast setup.</figcaption>
+        </div>
+      </div>
+    </div>
+  </div>
+</section> -->
+
+<section class="hero teaser">
+  <div class="container is-max-desktop">
+    <div class="hero-body">
+      <div class="columns is-centered">
+        <div class="column is-full">
+          <img id="teaserImg" src="./static/images/01-teaser.jpg" alt="Teaser Image" style="width: 100%; height: auto;">
+          <figcaption class="subtitle has-text-centered">
+          <em>StackItUp</em> allows non-experts to specify 3D structures for robot execution using a simple 2D sketch. 
+          From a rough front-view drawing, it predicts accurate 3D poses and hidden supports to generate stable structures 
+          that resemble the sketch. These poses can be directly used by a robotic arm as goal specifications for motion planning 
+          and physical execution. Shown: input sketches (left), generated 3D structures with predicted supports highlighted (middle), 
+          and real robot executions (right).
+          </figcaption>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <!-- Abstract. -->
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Abstract</h2>
+        <div class="content has-text-justified">
+          <p>
+           Imagine a child sketching the Eiffel Tower and asking a robot to bring it to life. 
+            Today’s robot manipulation systems can’t act on such sketches directly—they require 
+            precise 3D block poses as goals, which in turn demand structural analysis and expert 
+            tools like CAD. We present <em>StackItUp</em>, a system that enables non-experts to 
+            specify complex 3D structures using only 2D front-view hand-drawn sketches. 
+            <em>StackItUp</em> introduces an abstract relation graph to bridge the gap between rough 
+            sketches and accurate 3D block arrangements, capturing the symbolic geometric relations 
+            (e.g., <em>left-of</em>) and stability patterns (e.g., <em>two-pillar-bridge</em>) while 
+            discarding noisy metric details from sketches. It then grounds this graph to 3D poses 
+            using compositional diffusion models and iteratively updates it by predicting hidden 
+            internal and rear supports—critical for stability but absent from the sketch. Evaluated 
+            on sketches of iconic landmarks and modern house designs, <em>StackItUp</em> consistently 
+            produces stable, multilevel 3D structures and outperforms all baselines in both stability 
+            and visual resemblance.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<section class="section">
+  <div class="container is-max-desktop">
+
+    <div class="columns is-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Method Overview</h2>   
+        <div class="content has-text-justified">
+          <object data="./static/images/02-overview.jpg" type="image/jpeg" width="100%">
+            <!-- Fallback content for browsers that don't support the object tag -->
+            <img src="./static/images/02-overview.jpg" alt="Method Overview">
+          </object>
+          <p><em>StackItUp</em> uses an abstract relation graph <em>&#x1D4AA;</em> 
+            as an intermediate between a rough 2D sketch (left) and the generated 3D block arrangement (right). 
+            The graph (middle) encodes high-level geometric and stability relations while abstracting away exact poses. 
+            <em>StackItUp</em> first extracts <em>&#x1D4AA;<sub>0</sub></em> from visible blocks in the sketch (blue nodes), 
+            then iteratively grounds it to 3D poses using compositional diffusion models. 
+            If instability is detected, the graph is updated with predicted hidden supports (green nodes), 
+            and re-grounded to 3D poses.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="columns is-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Iterative Graph Grounding</h2>   
+        <div class="content has-text-justified">
+          <object data="./static/images/03-iterative.jpg" type="image/jpeg" width="100%">
+            <!-- Fallback content for browsers that don't support the object tag -->
+            <img src="./static/images/03-iterative.jpg" alt="Iterative Graph Grounding">
+          </object>
+          <p>In the forward step (left), given a graph <em>&#x1D4AA;<sub>t</sub></em>, 
+          compositional diffusion models generate 3D block poses. 
+          In the backward step (center-left), <em>&#x1D4AA;<sub>t</sub></em> is decomposed into subgraphs 
+          based on stability patterns, and each is checked via physics simulation. 
+          If unstable, new support blocks (green nodes) and relations are added. 
+          These updates are aggregated into an updated graph <em>&#x1D4AA;<sub>t+1</sub></em> 
+          for re-grounding. The right column shows the 3D structure before and after the graph update, 
+          with an added support ensuring stability.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="columns is-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Diverse 3D Structures Generated by StackItUp.</h2>
+        <div class="columns is-centered">
+          <div class="column is-full">
+            <object data="./static/images/04-qualitative_result.jpg" type="image/jpeg" width="100%" >
+              <!-- Fallback content for browsers that don't support the object tag -->
+              <img src="./static/images/04-qualitative_result.jpg" alt="Showcase">
+            </object>
+            <figcaption class="has-text-centered">3D arrangements generated by StackItUp from 2D sketches. </figcaption>
+          </div>
+        </div>
+
+        <p>Top row: sketches where hidden supports are predicted for stability. Bottom row: sketches that require no hidden supports.</p>
+      </div>
+    </div>
+
+    <div class="columns is-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">StackItUp vs the Baselines.</h2>
+    
+        <div class="columns is-centered">
+          <div class="column is-full">
+            <object data="./static/images/05-qualitative_comp.jpg" type="image/jpeg" width="100%" >
+              <!-- Fallback content for browsers that don't support the object tag -->
+              <img src="./static/images/05-qualitative_comp.jpg" alt="Comparison">
+            </object>
+            <figcaption class="has-text-centered">Comparison of 3D block arrangements generated from 2D sketches across methods. </figcaption>
+          </div>
+        </div>
+        <p>StackItUp consistently produces structures that are both visually faithful and physically stable.</p>
+      </div>
+    </div>
+
+    <div class="columns is-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Robustness of StackItUp.</h2>
+    
+        <div class="columns is-centered">
+          <div class="column is-full">
+            <object data="./static/images/06-generalization.jpg" type="image/jpeg" width="100%" >
+              <!-- Fallback content for browsers that don't support the object tag -->
+              <img src="./static/images/06-generalization.jpg" alt="Generalization">
+            </object>
+            <figcaption class="has-text-centered">Adaptation of the 3D pose generation to different block geometries. </figcaption>
+          </div>
+        </div>
+        <p>
+        <em>StackItUp</em> adapts the 3D poses to different block geometries. 
+        Given a sketch, it adjusts poses to accommodate geometric variations under the same 
+        <em>&#x1D4AA;</em> (a). 
+        If the structure is stable through pose adjustment alone, <em>StackItUp</em> extends 
+        <em>&#x1D4AA;</em> with hidden objects and re-grounds it to new poses (b).
+      </p>
+      </div>
+    </div>
+
+</section>
+
+
+<section class="section" id="BibTeX">
+  <div class="container is-max-desktop content">
+    <h2 class="title">BibTeX</h2>
+    <pre><code>
+    @inproceedings{xu2025stackup3dstable,
+      title={"Stack It Up!": 3D Stable Structure Generation from 2D Hand-drawn Sketch}, 
+      author={Yiqing Xu and Linfeng Li and Cunjun Yu and David Hsu},
+      year={2025},
+      booktitle={Conference on Robot Learning (CoRL)},
+    }
+</code></pre>
+  </div>
+</section>
+
+
+<footer class="footer">
+  <div class="container">
+    <div class="content has-text-centered">
+      <a class="icon-link"
+         href="https://arxiv.org/abs/2405.11928">
+        <i class="fas fa-file-pdf"></i>
+      </a>
+      <a class="icon-link" href="" class="external-link" disabled>
+        <i class="fab fa-github"></i>
+      </a>
+    </div>
+    <div class="columns is-centered">
+      <div class="column is-8">
+        <div class="content">
+          <p>
+            This website is licensed under a <a rel="license"
+                                                href="http://creativecommons.org/licenses/by-sa/4.0/">Creative
+            Commons Attribution-ShareAlike 4.0 International License</a>.
+          </p>
+          <p>
+            This means you are free to borrow the <a
+              href="https://github.com/nerfies/nerfies.github.io">source code</a> of this website,
+            we just ask that you link back to this page in the footer.
+            Please remember to remove the analytics code included in the header of the website which
+            you do not want on your website.
+          
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
