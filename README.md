@@ -1,15 +1,15 @@
-# "Set It Up!": Functional Object Arrangement with Compositional Generative Models
+# "Stack It Up!": 3D Stable Structure Generation from 2D Hand-drawn Sketch
 
-This is the repository that contains source code for the [SetItUp website](https://setitup-rss.github.io).
+This is the repository that contains source code for the [StackItUp website](https://stackitup-corl.github.io).
 
-You can cite "Set It Up" as follows:
+You can cite "Stack It Up" as follows:
 ```
-@inproceedings{xu2024set,
-      title={"Set It Up!": Functional Object Arrangement with Compositional Generative Models}, 
-      author={Yiqing Xu and Jiayuan Mao and Yilun Du and Tomas Lozáno-Pérez and Leslie Pack Kaebling and David Hsu},
-      year={2024},
-      booktitle={Robotics: Science and Systems},
-}
+@inproceedings{xu2025stackup3dstable,
+      title={"Stack It Up!": 3D Stable Structure Generation from 2D Hand-drawn Sketch}, 
+      author={Yiqing Xu and Linfeng Li and Cunjun Yu and David Hsu},
+      year={2025},
+      booktitle={Conference on Robot Learning (CoRL)},
+    }
 ```
 
 # Website License
